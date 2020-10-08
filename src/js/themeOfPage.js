@@ -8,25 +8,31 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
-restorePageTheme();
-
 refs.themeSwitchToggle.addEventListener('input', onSwitchToggleClick);
+refs.themeSwitchToggle.addEventListener('input', saveResultOnSwitchToggleClick);
 
-function onSwitchToggleClick() {
+export function onSwitchToggleClick() {
   if (refs.themeSwitchToggle.checked) {
-    localStorage.setItem('Theme', Theme.DARK);
     refs.bodyOfPage.classList.remove(Theme.LIGHT);
     return refs.bodyOfPage.classList.add(Theme.DARK);
   }
-  localStorage.setItem('Theme', Theme.LIGHT);
   refs.bodyOfPage.classList.remove(Theme.DARK);
   refs.bodyOfPage.classList.add(Theme.LIGHT);
 }
 
-function restorePageTheme() {
-  if (localStorage.getItem('Theme') === 'light-theme') {
-    return;
+export function saveResultOnSwitchToggleClick() {
+  if (refs.themeSwitchToggle.checked) {
+    return localStorage.setItem('Theme', Theme.DARK);
   }
-  refs.themeSwitchToggle.setAttribute('checked', true);
-  refs.bodyOfPage.classList.add(Theme.DARK);
+  localStorage.setItem('Theme', Theme.LIGHT);
+}
+
+export function restorePageTheme() {
+  if (localStorage.getItem('Theme') === null) {
+    refs.bodyOfPage.classList.add(Theme.LIGHT);
+  } else if (localStorage.getItem('Theme') === 'light-theme') {
+  } else {
+    refs.themeSwitchToggle.setAttribute('checked', true);
+    refs.bodyOfPage.classList.add(Theme.DARK);
+  }
 }

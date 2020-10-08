@@ -1,4 +1,11 @@
 import './styles.css';
 import initMenu from './js/menu.js';
 initMenu();
-import './js/themeOfPage';
+import {
+  restorePageTheme,
+  onSwitchToggleClick,
+  saveResultOnSwitchToggleClick,
+} from './js/themeOfPage';
+restorePageTheme();
+onSwitchToggleClick();
+saveResultOnSwitchToggleClick();
